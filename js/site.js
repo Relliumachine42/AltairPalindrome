@@ -18,6 +18,8 @@ function checkForPalindrome(input) {
 }
 
 function displayString(output) {
+    document.getElementById('alert').classList.remove('alert-danger');
+    document.getElementById('alert').classList.remove('alert-success');
     document.getElementById('results').textContent = output[0];
     if (output[1] == 'yes') {
         document.getElementById('result').textContent = 'Sure is';
