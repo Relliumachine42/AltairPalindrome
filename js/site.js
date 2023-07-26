@@ -1,6 +1,6 @@
 function getValues() {
     let userString = document.getElementById('userString').value;
-    userString = userString.replace(/ /g, '');
+    userString = userString.replace(/ /g, '').toLowerCase();
     let finalAnswer = checkForPalindrome(userString);
     displayString(finalAnswer);
 }
