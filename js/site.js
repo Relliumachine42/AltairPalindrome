@@ -7,22 +7,20 @@ function getValues() {
 
 function checkForPalindrome(input) {
     let revString = '';
-    let answer = 'no';
     for (let i = input.length - 1; i >= 0; i--) {
         revString += input[i];
     }
-    if (revString == input) {
-        answer = 'yes';
-    }
-    let output = [revString, answer];
-    return output;
+    let palObj = {
+        check: (revString == input),
+        reversed: revString
+    };
+    return palObj;
 }
 
 function displayString(output) {
-    document.getElementById('alert').classList.remove('alert-danger');
-    document.getElementById('alert').classList.remove('alert-success');
-    document.getElementById('results').textContent = output[0];
-    if (output[1] == 'yes') {
+    document.getElementById('alert').classList.remove('alert-danger','alert-success');
+    document.getElementById('results').textContent = output.reversed;
+    if (output.check == true) {
         document.getElementById('result').textContent = 'Sure is';
         document.getElementById('alert').classList.add('alert-success');
     } else {   
