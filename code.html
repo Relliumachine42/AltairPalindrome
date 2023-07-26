@@ -63,26 +63,62 @@
             <div class="col-12 col-lg-8">
                 <pre class="line-numbers">
                     <code class="language-js">
-                        function displayMessage() {
-                            let inputBox = document.getElementById('message');
-                            
-                            let message = inputBox.value;
+                        function getValues() {
+                            let userString = document.getElementById('userString').value;
+                            userString = userString.replaceAll(/[^a-z0-9]/gi, '').toLowerCase();
+                            let finalAnswer = checkForPalindrome(userString);
+                            displayString(finalAnswer);
+                        }
                         
-                            Swal.fire(
-                                {
-                                    backdrop: false,
-                                    title: 'Palindrome Identifier',
-                                    text: message
-                                }
-                            );
+                        function checkForPalindrome(input) {
+                            let revString = '';
+                            for (let i = input.length - 1; i >= 0; i--) {
+                                revString += input[i];
+                            }
+                            let palObj = {
+                                check: (revString == input),
+                                reversed: revString
+                            };
+                            return palObj;
+                        }
+                        
+                        function displayString(output) {
+                            document.getElementById('alert').classList.remove('alert-danger','alert-success');
+                            document.getElementById('results').textContent = output.reversed;
+                            if (output.check == true) {
+                                document.getElementById('result').textContent = 'Sure is';
+                                document.getElementById('alert').classList.add('alert-success');
+                            } else {   
+                                document.getElementById('result').textContent = 'Not a chance';
+                                document.getElementById('alert').classList.add('alert-danger');
+                            }
+                            document.getElementById('alert').classList.remove('invisible');
                         }
                     </code>
                 </pre>
             </div>
             <div class="col-12 col-lg-4">
-                <p>The code is structured in one function</p>
-                <h5>displayMessage</h5>
-                <p>Shows a SweetAlert with the value of the <code>message</code> variable</p>
+                <p>The code is structured in three functions</p>
+                <h5>Palindrom Identifier</h5>
+                <p>The first function <code>getValues()</code> grabs the user-provided string by intitializing variable
+                    <code>userString</code> with the value property of the input element with an id of userString. It
+                    replaces all characters within that string that are not between a-z or 0-9 with nothing, and
+                    converts any capital letters to lower case. Then it provides this processed userString as an
+                    argument for the second function and provides the result of that function as an argument for the
+                    thrid function./p>
+                <p>The second function <code>checkForPalindrome()</code> declares a variable <code>revString</code>,
+                    then inside a <code>for()</code> loop, adds every item within the string <code>input</code>
+                    individually, counting backwards. An object <code>palObj</code> is initialized with two items,
+                    reversed, which has the property of revString, and check, which has a boolean property that results
+                    from asking whether revString is equal to input. Then the function returns palObj.</p>
+                <p>The third function <code>displayString</code> removes the color scheme from the alert box by removing
+                    the class attributes, 'alert-danger' and 'alert-success', in case they're there from previous
+                    instances. It puts the reversed item within the object output into the element with ID results as
+                    text content. An <code>if()</code> checks if the item check within output is true or false, adding
+                    validation text to the element with ID result and the alert-success class attribute to the element
+                    with ID alert. If output.check is not true, it adds rejection text content to the same element, ID
+                    result, and 'alert-danger' to the same element, ID alert. Finally, it removes the class attribute
+                    'invisible' from the element with ID alert so that the results are visible.</p>
             </div>
         </div>
     </main>
@@ -94,7 +130,7 @@
                     &copy;2023 Glenn Schwartz
                 </div>
                 <div class="col">
-                    <img src="/img/logolengthwise.png" height="35"/>
+                    <img src="/img/logolengthwise.png" height="35" />
                 </div>
                 <div class="col text-lg-end">
                     <a href="#"><i class="socialIcons bi bi-linkedin"></i></a>
