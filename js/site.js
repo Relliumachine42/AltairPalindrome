@@ -1,6 +1,6 @@
 function getValues() {
     let userString = document.getElementById('userString').value;
-    userString = userString.replace(/ /g, '').toLowerCase();
+    userString = userString.replaceAll(/[^a-z0-9]/gi, '').toLowerCase();
     let finalAnswer = checkForPalindrome(userString);
     displayString(finalAnswer);
 }
